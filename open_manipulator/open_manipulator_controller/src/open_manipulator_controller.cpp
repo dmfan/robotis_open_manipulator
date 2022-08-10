@@ -154,7 +154,7 @@ void OpenManipulatorController::initPublisher()
     for (auto const& name:gazebo_joints_name)
     {
       ros::Publisher pb;
-      pb = priv_node_handle_.advertise<std_msgs::Float64>(name + "_position/command", 10);
+      pb = priv_node_handle_.advertise<std_msgs::Float64>(name + "_position/command", 10);      // the messages to publish goal position of each joint to gazebo simulation node. 仅在使用仿真时才发布
       gazebo_goal_joint_position_pub_.push_back(pb);
     }
   }

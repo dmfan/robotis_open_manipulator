@@ -23,7 +23,7 @@ ros::Publisher gripper_joint_sub_pub;
 
 void gripperJointCallback(const std_msgs::Float64::ConstPtr& msg)
 {
-  gripper_joint_sub_pub.publish(msg);
+  gripper_joint_sub_pub.publish(msg);                                                                                         // 转发数据给 gazebo 仿真末端抓手
 }
 
 int main(int argc, char **argv)
@@ -31,8 +31,8 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "gripper_sub_publisher");
   ros::NodeHandle node_handle("");
 
-  ros::Subscriber gripper_joint_sub = node_handle.subscribe("gripper_position/command", 10, gripperJointCallback);
-  gripper_joint_sub_pub = node_handle.advertise<std_msgs::Float64>("gripper_sub_position/command", 10);
+  ros::Subscriber gripper_joint_sub = node_handle.subscribe("gripper_position/command", 10, gripperJointCallback);            // 订阅 仿真时 open_manipulator_controller发送出来的数据
+  gripper_joint_sub_pub = node_handle.advertise<std_msgs::Float64>("gripper_sub_position/command", 10);                       // gazebo 接收末端抓手数据 话题
 
   ros::spin();
   return 0;
